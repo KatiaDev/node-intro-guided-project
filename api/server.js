@@ -1,21 +1,22 @@
 // IMPORTS AT THE TOP
-const express = require("express");
-const Dog = require("./dogs/dog-model");
-const mongoose = require("mongoose");
 require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const dogRouter = require("./dogs/dog-router");
 
 // INSTANCE OF EXPRESS APP
 const server = express();
+server.use("/api/dogs", dogRouter);
 
 // GLOBAL MIDDLEWARE
-//server.use = express.json();
+server.use(express.json());
 
 // DB CONNECT
 
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      `mongodb+srv://admin:${process.env.PASSWORD}@stepit.6cdla.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+      `mongodb+srv://admin:${process.env.PASSWORD}@stepit.6cdla.mongodb.net/Pets?retryWrites=true&w=majority`
     );
     console.log("MongoDB connected!");
   } catch (err) {
@@ -24,6 +25,10 @@ const connectDB = async () => {
 };
 
 connectDB();
+
+server.get("/", (req, res) => {
+  return res.status(200).send("<h1>Hello World!!!</h1>");
+});
 
 // EXPOSING THE SERVER TO OTHER MODULES
 module.exports = server;

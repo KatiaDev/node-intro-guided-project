@@ -1,5 +1,4 @@
 const server = require("../server");
-const mongoose = require("mongoose");
 const express = require("express");
 const Dog = require("./dog-mongo-model");
 
@@ -7,13 +6,8 @@ const router = express.Router();
 
 // ENDPOINTS
 
-// [GET] / (Hello World endpoint)
-server.get("/", (req, res) => {
-  return res.status(200).send("<h1>Hello World!!!</h1>");
-});
-
 // [GET] /api/dogs (R of CRUD, fetch all dogs)
-server.get("/api/dogs", (req, res) => {
+router.get("/", (req, res) => {
   Dog.find()
     .exec()
     .then((dogs) => {
@@ -62,3 +56,4 @@ server.get("/api/dogs", (req, res) => {
 //     res.status(200).json(dogs);
 //   });
 // });
+module.exports = router;

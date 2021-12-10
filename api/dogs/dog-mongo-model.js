@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const DogSchema = mongoose.Schema({
+const DogSchema = new mongoose.Schema({
   name: String,
   weight: Number,
   color: String,
