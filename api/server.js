@@ -3,13 +3,14 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const dogRouter = require("./dogs/dog-router");
-
+const userRouter = require("./users/user-router");
 // INSTANCE OF EXPRESS APP
 const server = express();
-server.use("/api/dogs", dogRouter);
 
 // GLOBAL MIDDLEWARE
 server.use(express.json());
+server.use("/api/dogs", dogRouter);
+server.use("/api/users", userRouter);
 
 // DB CONNECT
 
