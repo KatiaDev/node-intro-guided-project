@@ -2,8 +2,8 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const dogRouter = require("./dogs/dog-router");
-const userRouter = require("./users/user-router");
+const dogRouter = require("./dogs/router");
+const userRouter = require("./users/router");
 // INSTANCE OF EXPRESS APP
 const server = express();
 

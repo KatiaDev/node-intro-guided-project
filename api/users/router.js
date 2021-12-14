@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("./user-model");
+const User = require("./model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -19,22 +19,22 @@ router.post("/register", async (req, res) => {
   try {
     console.log("body:", req.body);
 
-    const newUser = new User({
+    const newUser = await new User({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
       password: await bcrypt.hash(req.body.password, 14),
     }).save();
 
-    res.status(201).json({ message: "User Created" });
+    res.status(201).json(newUser);
   } catch (error) {
     return res.status(500).json({ message: "error" });
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
   try {
-    const email = req.body;
+    const { email } = req.body;
 
     const foundUser = await User.findOne({ email }).exec();
 

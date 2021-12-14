@@ -1,5 +1,5 @@
 const express = require("express");
-const Dog = require("./dog-mongo-model");
+const Dog = require("./model");
 const restrictAccess = require("../auth/middleware");
 const router = express.Router();
 
